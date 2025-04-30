@@ -27,6 +27,9 @@ func (h *LinkHandler) CreateLink(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Некорректный запрос"})
 		return
 	}
+	if !strings.HasPrefix(request.Link, "http://") && !strings.HasPrefix(request.Link, "https://") {
+		request.Link = "https://" + request.Link
+	}
 	validate := validator.New()
 	if err := validate.Struct(&request); err != nil {
 		log.Printf("Ошибка валидации:%v", err)
@@ -39,6 +42,7 @@ func (h *LinkHandler) CreateLink(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Неккоректный запрос"})
 		return
 	}
+	shortLink = c.Request.Host + c.Request.URL.Port() + "/" + shortLink
 	c.JSON(http.StatusOK, gin.H{"shortLink": shortLink})
 }
 
