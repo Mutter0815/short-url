@@ -21,20 +21,24 @@ DB_PORT="5433"
 DB_NAME="person_db"
 DB_PASSWORD="admin"
 ```
-3. Выполните миграции
-Миграции выполняются с помощью инструмента. Чтобы применить миграции, используй следующую команду:
+3. **Запусти через Docker**
 ```bash
-migrate -path internal/storage/database/migrations \
-        -database "postgres://postgres:admin@localhost:5433/person_db?sslmode=disable" \
-        up
+docker-compose up --build
+```
 
-```
-4. Cоберите и запустите приложение
-```
-go build -o short-url ./cmd
-./short-url
+Сервис доступен на [localhost:8080](http://localhost:8080)
 
-```
+
+**Стек технологий**
+
+Go 1.23
+
+PostgreSQL 15
+
+Gin (HTTP сервер)
+
+Docker + Docker Compose
+
 
 ## 📌 Пример использования API
 Создание короткой ссылки:
