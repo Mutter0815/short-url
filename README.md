@@ -17,7 +17,7 @@ cd short-url
 ```env
 DB_USER="postgres"
 DB_HOST="localhost"
-DB_PORT="5433"
+DB_PORT="5432"
 DB_NAME="person_db"
 DB_PASSWORD="admin"
 ```
