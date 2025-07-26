@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/caarlos0/env/v10"
-	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -21,12 +20,8 @@ type DBConfig struct {
 
 func Load() *Config {
 	cfg := &Config{}
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Ошибка загрузки .env файла1")
-	}
 	if err := env.Parse(cfg); err != nil {
-		log.Fatalf("Ошибка загрузки .env файла %v", err)
-		return nil
+		log.Fatalf("Ошибка загрузки переменных окружения: %v", err)
 	}
 	return cfg
 }
